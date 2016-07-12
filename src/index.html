@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kair - Salon Management System</title>
+    <!-- bower:css -->
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="lib/angular-toastr/dist/angular-toastr.css" />
+    <link rel="stylesheet" href="lib/ng-table/dist/ng-table.css" />
+    <link rel="stylesheet" href="lib/angular-xeditable/dist/css/xeditable.css" />
+    <link rel="stylesheet" href="lib/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="lib/angular-ui-select/dist/select.css" />
+    <link rel="stylesheet" href="lib/fullcalendar/dist/fullcalendar.css" />
+    <link rel="stylesheet" href="lib/mdPickers/dist/mdPickers.min.css" />
+    <!-- endbower -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <!-- inject:css -->
+    <link rel="stylesheet" href="style/font-awesome-4.6.3/css/font-awesome.css">
+    <link rel="stylesheet" href="style/font-awesome-4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style/animate.css">
+    <link rel="stylesheet" href="style/appts.css">
+    <link rel="stylesheet" href="style/customers.css">
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="style/newAppts.css">
+    <link rel="stylesheet" href="style/normalize.css">
+    <link rel="stylesheet" href="style/payment.css">
+    <link rel="stylesheet" href="style/products.css">
+    <link rel="stylesheet" href="style/services.css">
+    <link rel="stylesheet" href="style/stylists.css">
+    <link rel="stylesheet" href="style/transactions.css">
+    <!-- endinject -->
+    <!--      <script src="https://d3js.org/d3.v4.0.0-rc.2.min.js"></script>
+    <script type="text/javascript" src="https://github.com/adobe-webplatform/Snap.svg/raw/master/dist/snap.svg-min.js"></script>
+ -->
+</head>
+
+<body ui-router-styles>
+    <!-- <div id="vis"></div> -->
+    <div ui-view></div>
+    <!-- <script src="lib/angular-spinner/angular-spinner.js"></script> -->
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <!-- bower:js -->
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-toastr/dist/angular-toastr.tpls.js"></script>
+    <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="lib/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="lib/jsSHA/src/sha.js"></script>
+    <script src="lib/ng-twitter-api/dist/ng-twitter-api.js"></script>
+    <script src="lib/angular-sanitize/angular-sanitize.js"></script>
+    <script src="lib/angular-ui-router-styles/ui-router-styles.js"></script>
+    <script src="lib/ng-table/dist/ng-table.js"></script>
+    <script src="lib/angular-xeditable/dist/js/xeditable.js"></script>
+    <script src="lib/angular-animate/angular-animate.js"></script>
+    <script src="lib/angular-aria/angular-aria.js"></script>
+    <script src="lib/angular-messages/angular-messages.js"></script>
+    <script src="lib/angular-material/angular-material.js"></script>
+    <script src="lib/moment/moment.js"></script>
+    <script src="lib/angular-ui-select/dist/select.js"></script>
+    <script src="lib/ngSanitize/index.js"></script>
+    <script src="lib/fullcalendar/dist/fullcalendar.js"></script>
+    <script src="lib/mdPickers/dist/mdPickers.min.js"></script>
+    <script src="lib/angular-ui-calendar/src/calendar.js"></script>
+    <script src="lib/angular-payments/lib/angular-payments.js"></script>
+    <script src="lib/angular-stripe-checkout/angular-stripe-checkout.js"></script>
+    <!-- endbower -->
+    <script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <!-- inject:js -->
+    <script src="js/app.module.js"></script>
+    <script src="js/telCustomerFilter.js"></script>
+    <script src="js/appts/appts.controller.js"></script>
+    <script src="js/appts/newAppts.controller.js"></script>
+    <script src="js/customers/customers.controller.js"></script>
+    <script src="js/payments/payments.controller.js"></script>
+    <script src="js/login/d3.layout.cloud.js"></script>
+    <script src="js/login/login.ctrl.js"></script>
+    <script src="js/login/rAF.js"></script>
+    <script src="js/login/TweenMax.min.js"></script>
+    <script src="js/login/words.js"></script>
+    <script src="js/register/register.controller.js"></script>
+    <script src="js/main/main.controller.js"></script>
+    <script src="js/products/products.controller.js"></script>
+    <script src="js/serviceCtrl/services.controller.js"></script>
+    <script src="js/stylists/materialTable.js"></script>
+    <script src="js/stylists/stylists.controller.js"></script>
+    <script src="js/services/appointment.factory.js"></script>
+    <script src="js/services/auth.interceptor.js"></script>
+    <script src="js/services/auth.service.js"></script>
+    <script src="js/services/chirp.service.js"></script>
+    <script src="js/services/customers.factory.js"></script>
+    <script src="js/services/payment.factory.js"></script>
+    <script src="js/services/product.factory.js"></script>
+    <script src="js/services/service.factory.js"></script>
+    <script src="js/services/service.generator.js"></script>
+    <script src="js/services/stylist.factory.js"></script>
+    <script src="js/tweet/tweet.controller.js"></script>
+    <script src="js/transactions/temp.js"></script>
+    <script src="js/transactions/transactions.controller.js"></script>
+    <script src="js/tweetServices/oauth.js"></script>
+    <script src="js/tweetServices/tweet.services.js"></script>
+    <!-- endinject -->
+
+
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!-- /************* nav bar *************/ -->
+<!-- <nav class="navbar-fluid navbar-default navbar-fixed-top">
+    <div class="container">
+        centered container in nav-bar
+        <a ng-href="#/posts" class="navbar-brand active" href="" id="header">
+            <a  class="navbar-brand active" href="#/posts" id="header">
+            i-Kair
+        </a>
+        <a ui-sref="main.customers.grid" class="navbar-brand active">Customers</a>
+        <a ui-sref="main.stylists" class="navbar-brand">Stylists</a>
+        <a ui-sref="main.services" class="navbar-brand">Services</a>
+        <a ui-sref="main.products" class="navbar-brand">Products</a>
+        <a ui-sref="main.appointments.grid" class="navbar-brand">Check-In</a>
+        <a ui-sref="main.transactions.grid" class="navbar-brand">Planner</a>
+        <a ui-sref="main.transactions.create({apptId: ''})" class="navbar-brand">Payment</a>
+               <p class="navbar-right navbar-text" id="logout">
+            <a ng-click="main.logingout()">
+                <span class="glyphicon glyphicon-log-out" aria-hidden="true" id="logicon"></span>
+            </a>
+        </p>
+    </div>
+</nav> -->
+<div class="outer">
+    <nav id="nav-1" class="effect1">
+        <a class="pull-left" id="header">{{main.state.salonName}}</a>
+        <a ui-sref="main.customers.grid" class="link-1">Customers</a>
+        <a ui-sref="main.stylists" class="link-1 active">Stylists</a>
+        <a ui-sref="main.services" class="link-1" href="#">Services</a>
+        <a ui-sref="main.products" class="link-1" href="#">Products</a>
+        <a ui-sref="main.appointments.grid" class="link-1" href="#">Appointments</a>
+        <a ui-sref="main.transactions.grid" class="link-1" href="#">Planner</a>
+        <a ui-sref="main.transactions.create({apptId: ''})" class="link-1">Payment</a>
+        <p class="navbar-right navbar-text" id="logout">
+            <a ng-click="main.logingout()">
+                <span class="glyphicon glyphicon-log-out" aria-hidden="true" id="logicon"></span>
+            </a>
+        </p>
+    </nav>
+</div>
+<div class="footer clearfix">
+    <p>
+        <!--   <span>Copyright &copy; 2016 Ke Wang</span> &nbsp;|&nbsp; -->
+        <span>&copy; 2016 KW</span> &nbsp;|&nbsp;
+        <span><a href="mailto:shawn_k03@hotmail.com" id="contact">Support</a></span>
+    </p>
+</div>
+<div ui-view></div>

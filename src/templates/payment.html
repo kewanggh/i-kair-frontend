@@ -1,0 +1,139 @@
+<div id="wrapper" ng-cloak>
+    <div class="apptcontainer">
+        <form id="signup" class="animated fadeIn">
+            <div class="header">
+                <h3 ng-hide="payments.soda">Create New Payment</h3>
+                <h3 ng-show="payments.candy">Add service</h3>
+            </div>
+            <div class="cartBox">
+                <div class="col-md-6">
+                    <span class="glyphicon glyphicon-shopping-cart cartIcon pull-right" type="submit" aria-hidden="true" data-toggle="modal" data-target=".bs-example-modal-lg"></span>
+                </div>
+                <div class="col-md-6 sumry">
+                    <div class="col-md-6">{{ payments.getQuantity()}}
+                        <ng-pluralize count="payments.getQuantity()" when="{1: 'item', 'other':'items'}"></ng-pluralize>
+                        <br /><span>{{ payments.getTotalAmount() | currency }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="sep"></div>
+            <div class="inputs">
+                <div class="form-group" ng-cloak>
+                    <label for="">Customer Id: {{payments.appt.customer.customerId}}</label>
+                    <ui-select ng-model="payments.appt" ng-disabled="disabled" reset-search-input="false" style="width: 450px; margin-bottom: 20px;">
+                        <ui-select-match placeholder="Pick one...">
+                            <span ng-bind="$select.selected.customer.firstName"></span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="appt in (payments.appts | filter: $select.search | filter: {appointmentId: payments.currentApptId}) | limitTo: 5">
+                            <span ng-bind="appt.customer.firstName"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="form-group" ng-show="payments.candy" ng-cloak>
+                    <div class="input-group" style="width: 450px; margin-bottom: 20px;">
+                        <label for="">Choose Service:</label>
+                        <ui-select ng-model="payments.service.name" ng-disabled="disabled" reset-search-input="false" autofocus>
+                            <ui-select-match placeholder="Pick one...">
+                                <span ng-bind="$select.selected.name"></span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="service in (payments.services | filter: $select.search)  | limitTo: 5">
+                                <span ng-bind="service.name"></span>
+                                <button type="button" class="btn btn-primary btn-xs pull-right smbtn" ng-click="payments.addToCart(service); payments.addService(service)">&#10010;</button>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="input-group" style="width: 450px; margin-bottom: 20px;">
+                        <label for="">Choose Product:</label>
+                        <ui-select ng-model="payments.product.name" ng-disabled="disabled" reset-search-input="false" autofocus>
+                            <ui-select-match>
+                                <span ng-bind="$select.selected.name"></span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="product in (payments.products | filter: $select.search)  | limitTo: 5">
+                                <span ng-bind="product.name"></span>
+                                <button type="button" class="btn btn-primary btn-xs pull-right smbtn" ng-click="payments.addToCart(product); payments.addProduct(product)">&#10010;</button>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <!--     <div class="form-group">
+                    <label for="">Notes</label>
+                    <input type="text" autofocus/>
+                </div> -->
+                </div>
+                <button id="submit" ng-show="payments.candy" stripe-checkout="payments.doCheckout" data-key="pk_test_1QO08jFs6dHBRdbF8rxE4BH8" data-name="i-Kair" data-customer="Ben" data-email="shawn_k03@hotmail.com" data-image="/style/img/product.png" data-description="payments.newlyCreatedPayment.transactionId" data-amount="{{payments.getTotalAfterTaxS()}}">
+                    Pay
+                </button>
+                <!-- <pre>Model: {{asyncSelected | json}}</pre> -->
+                <!--        <input type="email" ng-model="asyncSelected" placeholder="Locations loaded via $http" uib-typeahead="search for search in newAppts.getCustomer($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" autofocus />
+         <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+         <div ng-show="noResults">
+             <i class="glyphicon glyphicon-remove"></i> No Results Found
+         </div> -->
+                <!--    <div class="checkboxy">
+                 <input name="cecky" id="checky" value="1" type="checkbox" />
+                 <label class="terms">I accept the terms of use</label>
+             </div> -->
+                <button id="submit" ng-hide="payments.soda" ng-click="payments.createNewPayment(payments.appt)">Create New Payment</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Shopping Cart</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning" role="alert" ng-show="payments.getQuantity() === 0">
+                    Your cart is empty
+                </div>
+                <div class="table-responsive col-lg-12" ng-show="payments.getQuantity() > 0">
+                    <table class="table table-striped ngCart cart">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th>Quantity</th>
+                                <th>Amount</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr ng-show="payments.setTaxRate">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Tax ({{ payments.setTaxRate }}%):</td>
+                                <td>{{ payments.getTaxTotal() | currency }}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Total:</td>
+                                <td>{{ payments.getTotalAfterTax() | currency }}</td>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr ng-repeat="item in payments.cart">
+                                <td><span ng-click="" class="glyphicon glyphicon-remove"></span></td>
+                                <td>{{ item.name }}</td>
+                                <td><span class="glyphicon glyphicon-minus" ng-click="item.setQuantity(-1, true)"></span>&nbsp;&nbsp; {{ 1 | number }}&nbsp;&nbsp;
+                                    <span class="glyphicon glyphicon-plus" ng-click="item.setQuantity(1, true)"></span></td>
+                                <td>{{ item.unitPrice | currency}}</td>
+                                <td>{{ item.unitPrice | currency }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

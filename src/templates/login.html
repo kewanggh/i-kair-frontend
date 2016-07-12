@@ -1,0 +1,46 @@
+<div class="loginouter">
+    <nav class="navbar-fluid navbar-default navbar-fixed-top" id="loginnav">
+        <div class="container">
+            <a class="navbar-brand" id="loginHeader">&#10077;Welcome to i-Kair!&#10078; </a>
+            <p class="navbar-text"></p>
+            <p class="navbar-right navbar-text">
+           <!--  <a class="btn btn-default" ng-click="toShow =!toShow">Login</a> or  -->
+           </p>
+        </div>
+    </nav>
+
+    <!-- <img src="/style/sea.jpg" alt=""> -->
+    <div class="col-md-offset-4 col-md-4 clearfix dog" id="mainContainer1">
+        <div>
+            <div class="panel panel-info animated zoomIn" ng-hide="!toShow">
+                <div class="panel-heading">
+                    Login
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="">Email</label>
+                        <input type="email" autofocus ng-model="loginCtrl.username" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Password</label>
+                        <input type="password" pattern=".{6,}" required title="6 characters minimum" autofocus ng-model="loginCtrl.password" class="form-control">
+                        <!--  <input type="password" pattern=".{6,6}" required title="6 characters only" ng-model="loginCtrl.password" class="form-control"> -->
+                    </div>
+                </div>
+                <!--  <div class="box boxleft"><span class="dot"></span></div> -->
+                <div class="panel-footer clearfix">
+                   <!--  <a ui-sref="register" class="btn btn-default">Register</a> -->
+                    <button class="btn btn-primary btn-lg btn-block pull-right" ng-click="loginCtrl.login()">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<button class="waterdrop" ng-click="toShow =!toShow">Log-In</button>
+    <!-- <img src="/style/img/water-drop.png" class="waterdrop" ng-click="toShow =!toShow" alt=""> -->
+   <!--  <span class="loginword"><a  ng-click="toShow =!toShow">Log-In</a></span> -->
+    <div id="large-header" class="large-header">
+        <canvas id="demo-canvas"></canvas>
+    </div>
+</div>
+<!-- <img src=/style/img/woman.jpg class="woman" width="100%" height="100%" alt=""> -->
+<div class="footer clearfix" style="background: #2c3e50; border: none"> <span class="hello"><a href="mailto:shawn_k03@hotmail.com" id="contact">KW+</a></span> <a class="btn" id="registerBtn" href="#/register">Register</a></div>

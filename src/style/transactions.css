@@ -1,0 +1,56 @@
+#wrapper {
+    height: 610px;
+    width: 1400px;
+    overflow: hidden;
+}
+
+#calendar {
+    overflow: auto;
+    height: 500px;
+}
+
+.paymentContainer {
+    background-color: white;
+    height: 500px;
+}
+
+div.spider.ng-scope < tr:nth-child(odd) td {
+    background: #fff;
+}
+
+.fc-widget-content tr:nth-child(odd):hover td {
+    pointer-events: none !important;
+}
+
+tr.nth-child(odd):not(tr:nth-child(odd) td):hover {
+    pointer-events: none;
+}
+
+ui-calendar tr:hover {
+    pointer-events: none;
+}
+
+.Kate {
+    background-color: #f58b4c;
+    border: 1px solid lightgrey;
+}
+
+.Ben {
+    background-color: #a3b86c;
+    border: 1px solid lightgrey;
+}
+
+.Lisa {
+    background-color: #cd594a;
+    border: 1px solid lightgrey;
+}
+
+.Tom {
+    background-color: #3c6478;
+    border: 1px solid lightgrey;
+}
+
+.John {
+    background-color: #efd469;
+    border: 1px solid lightgrey;
+}

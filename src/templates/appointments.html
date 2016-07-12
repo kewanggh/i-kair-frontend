@@ -1,0 +1,67 @@
+<div id="progressBar" ng-show=appts.loading></div>
+<div id="wrapper" ng-cloak>
+    <div id="demo" class="animated fadeIn">
+        <!-- Responsive table starts here -->
+        <!-- For correct display on small screens you must add 'data-title' to each 'td' in your table -->
+        <h3 class="stylistTitle">Current Appointments List</h3>
+        <button type="button" class="btn btn-primary pull-right btn-lg tod" ui-sref="main.appointments.create({ customerId: '' })">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </button>
+        <div class="table-responsive-vertical shadow-z-1 scroll appttable">
+            <!-- Table starts here -->
+            <table id="table" class="table table-condensed table-hover table-bordered table-mc-light-blue table-responsive-vertical">
+                <thead>
+                    <tr>
+                        <th>Appt ID</th>
+                        <th>Name</th>
+                        <th>Stylist</th>
+                        <th>Time</th>
+                        <th>CheckIn</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody ng-init="appts.getAppts()">
+                    <tr ng-repeat="appt in appts.appts | filter: {checkoutTime: null, customer: {firstName: text}} | orderBy: 'appt.scheduleCheckin': false">
+                        <td data-title="Appt ID">
+                            {{appt.appointmentId}}
+                        </td>
+                        <td data-title="Name">
+                            <a href="#" editable-text="appt.customer.firstName">
+                        {{appt.customer.firstName}}</a>
+                        </td>
+                        <td data-title="Stylist">
+                            {{appt.stylist.firstName}}
+                        </td>
+                        <td data-title="Time">
+                            <a href="#" editable-text="appt.scheduleCheckin">
+                            {{appt.scheduleCheckin | date: 'short'}}</a>
+                        </td>
+                        <td data-title="CheckIn">
+                            <input type="checkbox" ng-model="appt.checkinTime" value="checkin" ng-checked="(appt.checkinTime).length > 0" ng-click="appts.checkin(appt)" class="radio">&nbsp;&emsp;&nbsp;{{appt.checkinTime | date: 'HH:mm'}}
+                            <!--  <button class="btn btn-primary boni" ng-click="appts.checkin(appt)">Check-In</button> -->
+                        </td>
+                        <td data-title="Actions">
+                            <form class="form-inline">
+                                <button class="btn btn-primary bon" ng-click="appts.updateAppt(appt)"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                                <button class="btn btn-warning bon" ng-click="appts.deleteAppt(appt)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                                <button class="btn btn-success bon" ui-sref="main.transactions.create({apptId: appt.appointmentId})" ng-click="appts.checkout(appt)">Check-Out</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <!-- Table Constructor change table classes, you don't need it in your project -->
+    </div>
+                <div class="searchBox">
+                <form>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon glyphicon glyphicon-search"></span>
+                            <input type="text" class="form-control" placeholder="Search" ng-model=text autofocus>
+                        </div>
+                    </div>
+                </form>
+            </div>
+</div>

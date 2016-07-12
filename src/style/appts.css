@@ -1,0 +1,41 @@
+#wrapper {
+    width: 960px;
+    /* background-color: white; */
+}
+
+
+/* .boni {
+margin-left: 30px;
+} */
+
+.bon {
+    margin-left: 10px;
+}
+
+input.radio {
+    margin: auto;
+    margin-top: 10px;
+}
+
+.grow {
+    transition: all .2s ease-in-out;
+}
+
+.grow:hover {
+    transform: scale(1.1);
+}
+
+#demo {
+    /*  overflow: auto; */
+    height: 500px;
+    width: 1500px;
+}
+
+td {
+    padding: 5px 5px 5px 5px;
+    vertical-align: middle;
+}
+
+.appttable {
+    height: 450px;
+}

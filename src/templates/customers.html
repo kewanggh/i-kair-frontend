@@ -1,0 +1,138 @@
+<div id="wrapper" width=300px ng-cloak>
+    <div class="customerOuter animated fadeIn">
+        <h3 class="stylistTitle">Customers List</h3>
+        <button type="button" class="btn btn-primary pull-right btn-lg add grow tod" data-toggle="modal" data-target="#myModal">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+        </button>
+        <div class="customerTable scroll" ng-cloak>
+            <table class="table table-bordered table-hover table-condensed" show-filter="true" ng-init="customers.getCustomers()">
+                <!--   <span class=""></span> -->
+                <thead>
+                    <tr>
+                        <th>
+                            <a ng-click="sortType = 'firstName'; sortReverse = !sortReverse">
+                            First Name
+                            <span ng-show="sortType == 'firstName' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
+                            <span ng-show="sortType == 'firstName' && !sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                            </a>
+                        </th>
+                        <th>Last Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Gender</th>
+                        <th>Notes</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="customer in customers.customers | orderBy:sortType:!sortReverse | filter: text">
+                    <td title="'First Name'" filter="{ firstName: 'text'}" sortable="'firstName'">
+                        <a href="#" editable-text="customer.firstName">
+                {{customer.firstName  || '' }}
+                </a>
+                    </td>
+                    <td title="'Last Name'" filter="{ lastName: 'text'}" sortable="'lastName'">
+                        <a href="#" editable-text="customer.lastName">
+                {{customer.lastName}}</a>
+                    </td>
+                    <td title="'Phone'" filter="{ phone: 'number'}" sortable="'phone'">
+                        <a href="#" editable-text="customer.phone">
+                {{customer.phone | tel}}</a>
+                    </td>
+                    <td title="'Email'" filter="{ email: 'text'}" sortable="'email'">
+                        <a href="#" editable-text="customer.email">
+                {{customer.email}}</a>
+                    </td>
+                    <td title="'Gender'" filter="{ gender: 'text'}" sortable="'gender'">
+                        <a href="#" editable-text="customer.gender">
+                {{customer.gender}}</a>
+                    </td>
+                    <td title="'Notes'" filter="{ text: 'text'}" sortable="'text'">
+                        <a href="#" editable-text="customer.text">
+                {{customer.text}}</a>
+                    </td>
+                    <td title="'Edit'">
+                        <form class="form-buttons form-inline">
+                            <button class="btn btn-primary" ng-click="customers.updateCustomer(customer)"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                            <button class="btn btn-warning" ng-click="customers.deleteCustomer(customer)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                            <a class="btn btn-primary" ui-sref="main.appointments.create({ customerId: customer.customerId })">New Appt.</a>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="searchBox1">
+            <form>
+                <div class="form-group grow">
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-search"></span>
+                        <input type="text" class="form-control searchField" placeholder="Search" ng-model=text autofocus>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--         <form class="navbar-form addnewcustomer" role="search">
+    <div class="form-group">
+        <input type="text" class="form-control searchField" placeholder="Search" ng-model="text">
+    </div>
+</form> -->
+    </div>
+    <!-- Button trigger modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div> -->
+                <div class="modal-body">
+                    <form ng-submit="customers.addCustomer(customers.customer)" class="panel panel-info">
+                        <div class="panel-heading">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            New Customer
+                        </div>
+                        <div class="panel-body">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="fname">First Name</label>
+                                    <input id="fname" type="text" ng-model="customers.customer.firstName" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lname">Last Name</label>
+                                    <input id="lname" type="text" ng-model="customers.customer.lastName" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input id="phone" type="text" ng-model="customers.customer.phone" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input tid="email" ype="Email" ng-model="customers.customer.email" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="gender">Gender</label>
+                                    <input id="gender" type="text" ng-model="customers.customer.gender" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="notes">Notes</label>
+                                    <input id="notes" type="text" ng-model="customers.customer.text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="stripe">Stripe CustomerID</label>
+                                    <input id="strip" type="text" ng-model="customers.customer.stripeCustomerId" class="form-control">
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="panel-footer clearfix">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary pull-right" data-dismiss="modal" ng-click="customers.addCustomer(customers.customer)">Add</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="customers.addCustomer(customers.customer)">Add</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="customers.addCustomer(customers.customer)">Add Customer</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>

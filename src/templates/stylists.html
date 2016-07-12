@@ -1,0 +1,103 @@
+<div id="wrapper" height=600px width=300px style="font: 3em;" ng-cloak>
+    <div id="demo" class="animated fadeIn">
+        <!-- Responsive table starts here -->
+        <!-- For correct display on small screens you must add 'data-title' to each 'td' in your table -->
+        <h3 class="stylistTitle">Stylists List</h3>
+        <button type="button" class="btn btn-primary pull-right btn-lg tod" data-toggle="modal" data-target="#myModal">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+        </button>
+        <div class="table-responsive-vertical shadow-z-1">
+            <!-- Table starts here -->
+            <table id="table" class="table table-hover table-bordered table-mc-light-blue table-responsive-vertical">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Email</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody ng-init="stylists.getStylists()">
+                    <tr ng-repeat="stylist in stylists.stylists">
+                        <td data-title="ID">
+                            {{stylist.stylistId}}
+                        </td>
+                        <td data-title="Name">
+                            <a href="#" editable-text="stylist.firstName">
+                        {{stylist.firstName}}</a>
+                        </td>
+                        <td data-title="Email">
+                            <a href="#" editable-text="stylist.email">
+                            {{stylist.email}}</a>
+                        </td>
+                        <td data-title="Description">
+                            <a href="#" editable-text="stylist.description">
+                            {{stylist.description}}</a>
+                        </td>
+                        <td data-title="'Edit'">
+                            <form class="form-buttons form-inline">
+                                <button class="btn btn-primary bon" ng-click="stylists.updateStylist(stylist)"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                                <button class="btn btn-warning bon" ng-click="stylists.deleteStylist(stylist)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Table Constructor change table classes, you don't need it in your project -->
+        <div class="searchBox">
+            <form>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-search"></span>
+                        <input type="text" class="form-control" placeholder="Search" ng-model=text>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div> -->
+            <div class="modal-body">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        New Customer
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="">First Name</label>
+                            <input type="text" ng-model="stylists.stylist.firstName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Last Name</label>
+                            <input type="text" ng-model="stylists.stylist.lastName" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Email</label>
+                            <input type="text" ng-model="stylists.stylist.email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Description</label>
+                            <input type="text" ng-model="stylists.stylist.description" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="panel-footer clearfix">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button class="btn btn-primary pull-right" data-dismiss="modal" ng-click="stylists.addStylist(stylists.stylist)">Add</button>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="customers.addCustomer(customers.customer)">Add</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="customers.addCustomer(customers.customer)">Add Customer</button>
+                </div> -->
+        </div>
+    </div>
+</div>

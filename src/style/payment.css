@@ -1,0 +1,64 @@
+#wrapper {
+    height: 800px;
+}
+
+#qty {
+    width: 30px;
+}
+
+.smbtn {
+    display: inline;
+}
+
+hr {
+    margin: 40px 0;
+}
+
+h3 {
+    color: #1758AA
+}
+
+h3 span {
+    font-size: 14px;
+    display: block;
+}
+
+span[ng-click] {
+    cursor: pointer;
+}
+
+#signup {
+    position: relative;
+}
+
+.cartBox {
+    width: 350px;
+    height: 80px;
+    top: 17px;
+    right: -70px;
+    font-size: 15px;
+    color: #a4b0cb;
+    padding: 0;
+    position: absolute;
+}
+
+.sumry {
+    padding: 0;
+    margin: 0;
+}
+
+.cartIcon {
+    font-size: 2em;
+    text-align: right;
+    line-height: 50px;
+    cursor: pointer;
+}
+
+.pie {
+    text-transform: lowercase;
+    display: inline-block;
+}
+
+.modal {
+    height: 900px;
+}

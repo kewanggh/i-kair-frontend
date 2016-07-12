@@ -1,0 +1,62 @@
+<div id="wrapper" ng-cloak>
+    <div class="apptcontainer">
+        <form id="signup" class="animated fadeIn">
+            <div class="header">
+                <h3>New Appointment Form</h3>
+            </div>
+            <div class="sep"></div>
+            <div class="inputs">
+                <div class="form-group">
+                    <label for="">Customer: {{newAppts.new.customer.firstName}}</label>
+                    <ui-select autofocus ng-model="newAppts.new.customer" ng-disabled="disabled" reset-search-input="false" style="width: 450px; margin-bottom: 20px;">
+                        <ui-select-match>
+                            <span ng-bind="$select.selected.firstName"></span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="customer in (newAppts.customers | filter: $select.search | filter: {customerId: newAppts.currentCustomerId}) | limitTo:5">
+                            <span ng-bind="customer.firstName"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="form-group">
+                    <label for="">Stylist: {{newAppts.new.stylist.firstName}}</label>
+                    <ui-select autofocus ng-model="newAppts.new.stylist" ng-disabled="disabled" reset-search-input="false" style="width: 450px; margin-bottom: 20px;">
+                        <ui-select-match>
+                            <span ng-bind="$select.selected.firstName"></span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="stylist in (newAppts.stylists | filter: $select.search)">
+                            <span ng-bind="stylist.firstName"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="form-group" style="width: 450px;">
+                    <label for="">Schedule Time</label>
+                    <div class="col-xs-6">
+                        <mdp-date-picker ng-model="newAppts.new.time" mdp-placeholder="Enter date"></mdp-date-picker>
+                    </div>
+                    <div class="col-xs-6">
+                        <mdp-time-picker ng-model="newAppts.new.time" mdp-placeholder="Enter time"></mdp-time-picker>
+                    </div>
+                </div>
+                <!-- <div class="form-group">
+                    <label for="">Schedule Time</label>
+                    <input type="text" autofocus />
+                </div> -->
+                <div class="form-group">
+                    <label for="">Notes</label>
+                    <input type="text" autofocus ng-model="newAppts.new.text" />
+                </div>
+                <!-- <pre>Model: {{asyncSelected | json}}</pre> -->
+                <!--        <input type="email" ng-model="asyncSelected" placeholder="Locations loaded via $http" uib-typeahead="search for search in newAppts.getCustomer($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" autofocus />
+         <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+         <div ng-show="noResults">
+             <i class="glyphicon glyphicon-remove"></i> No Results Found
+         </div> -->
+                <!--    <div class="checkboxy">
+                 <input name="cecky" id="checky" value="1" type="checkbox" />
+                 <label class="terms">I accept the terms of use</label>
+             </div> -->
+                <a id="submit" ng-click="newAppts.addAppt(newAppts.new)">Add</a>
+            </div>
+        </form>
+    </div>
+</div>
